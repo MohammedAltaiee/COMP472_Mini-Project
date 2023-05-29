@@ -1,0 +1,17 @@
+dataset = np.array([
+    [True, False, False, True, 'some', '$$$', False, True, 'french', '0-10', True],
+    [True, False, False, True, 'full', '$', False, False, 'thai', '30-60', False],
+    [False, True, False, False, 'some', '$', False, False, 'burger', '0-10', True],
+    [True, False, True, True, 'full', '$', True, False, 'thai', '10-30', True],
+    [True, False, True, False, 'full', '$$$', False, True, 'french', '> 60', False],
+    [False, True, False, True, 'some', '$$', True, True, 'italian', '0-10', True],
+    [False, True, False, False, 'none', '$', True, False, 'burger', '0-10', False],
+    [False, False, False, True, 'some', '$$', True, True, 'thai', '0-10', True],
+    [False, True, True, False, 'full', '$', True, False, 'burger', '> 60', False],
+    [True, True, True, True, 'full', '$$$', False, True, 'italian', '10-30', False],
+    [False, False, False, False, 'none', '$', False, False, 'thai', '0-10', False],
+    [True, True, True, True, 'full', '$', False, False, 'burger', '30-60', True],
+    ])
+
+    df2 = pd.DataFrame(dataset,
+                   columns=['alt', 'bar', 'fri', 'hun', 'pat', 'price', 'rain', 'res', 'type', 'est', 'willwait'])
