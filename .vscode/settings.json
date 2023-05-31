@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["pydotplus"]
+  "cSpell.words": [
+    "graphviz",
+    "pydotplus",
+    "sklearn"
+  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none"
 }
