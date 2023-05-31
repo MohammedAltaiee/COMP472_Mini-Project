@@ -1,17 +1,93 @@
-dataset = np.array([
-    [True, False, False, True, 'some', '$$$', False, True, 'french', '0-10', True],
-    [True, False, False, True, 'full', '$', False, False, 'thai', '30-60', False],
-    [False, True, False, False, 'some', '$', False, False, 'burger', '0-10', True],
-    [True, False, True, True, 'full', '$', True, False, 'thai', '10-30', True],
-    [True, False, True, False, 'full', '$$$', False, True, 'french', '> 60', False],
-    [False, True, False, True, 'some', '$$', True, True, 'italian', '0-10', True],
-    [False, True, False, False, 'none', '$', True, False, 'burger', '0-10', False],
-    [False, False, False, True, 'some', '$$', True, True, 'thai', '0-10', True],
-    [False, True, True, False, 'full', '$', True, False, 'burger', '> 60', False],
-    [True, True, True, True, 'full', '$$$', False, True, 'italian', '10-30', False],
-    [False, False, False, False, 'none', '$', False, False, 'thai', '0-10', False],
-    [True, True, True, True, 'full', '$', False, False, 'burger', '30-60', True],
-    ])
+	Alt	Bar	Fri	Hun	Pat	    Price Rain		Res	Type	Est	
+X1	Yes	No	No	Yes	Some	$$$	No	Yes	French	0-10	Y1 = Yes
+X2	Yes	No	No	Yes	Full	$	No	No	Thai	30-60	Y2 = No
+X3	No	Yes	No	No	Some	$	No	No	Burger	0-10	y3 = Yes
+X4	Yes	No	Yes	Yes	Full	$	Yes	No	Thai	30-Oct	y4 = Yes
+X5	Yes	No	Yes	No	Full	$$$	No	Yes	French	>60	y5 = No
+X6	No	Yes	No	Yes	Some	$$	Yes	Yes	Italian	0-10	y6 = Yes
+X7	No	Yes	No	No	None	$	Yes	No	Burger	0-10	y7 = No
+X8	No	No	No	Yes	Some	$$	Yes	Yes	Thai	0-10	y8 = Yes
+x9	No	Yes	Yes	No	Full	$	Yes	No	Burger	>60	y9 = No
+xo	Yes	Yes	Yes	Yes	Full	$$$	No	Yes	Italian	30-Oct	y10=No
+X11	No	No	No	No	None	$	No	No	Thai	0-10	y11=No
+X12	Yes	Yes	Yes	Yes	Full	$	No	No	Burger	30-60	y12=Yes
 
-    df2 = pd.DataFrame(dataset,
-                   columns=['alt', 'bar', 'fri', 'hun', 'pat', 'price', 'rain', 'res', 'type', 'est', 'willwait'])
+
+# dataset = np.array([
+
+#     'yes', 'no', 'no', 'yes', 'some', '$$$', 'no', 'yes', 'french', '0-10', 'yes'
+#     'yes', 'no', 'no', 'yes', 'full', '$', 'no', 'no', 'thai', '30-60', 'no'
+#     'no', 'yes', 'no', 'no', 'some', '$', 'no', 'no', 'burger', '0-10', 'yes'
+#     'yes', 'no', 'yes', 'yes', 'full', '$', 'yes', 'no', 'thai', '10-30', 'yes'
+#     'yes', 'no', 'yes', 'no', 'full', '$$$', 'no', 'yes', 'french', '>60', 'no'
+#     'no', 'yes', 'no', 'yes', 'some', '$$', 'yes', 'yes', 'italian', '0-10', 'yes'
+#     'no', 'yes', 'no', 'no', 'none', '$', 'yes', 'no', 'burger', '0-10', 'no'
+#     'no', 'no', 'no', 'yes', 'some', '$$', 'yes', 'yes', 'thai', '0-10', 'yes'
+#     'no', 'yes', 'yes', 'no', 'full', '$', 'yes', 'no', 'burger', '>60', 'no'
+#     'yes', 'yes', 'yes', 'yes', 'full', '$$$', 'no', 'yes', 'italian', '10-30', 'no'
+#     'no', 'no', 'no', 'no', 'none', '$', 'no', 'no', 'thai', '0-10', 'no'
+#     'yes', 'yes', 'yes', 'yes', 'full', '$', 'no', 'no', 'burger', '30-60', 'yes'
+# ])
+
+# # 4. predict the target variable for the test data
+# print("'this $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'")
+# print(dtc.predict([[1,0,0,1,1,0,0,1,0,0]]))
+# # get the string value for the dtc
+# print(dtc.classes_)
+# # get the probability for the dtc
+# print(dtc.predict_proba([[1,0,0,1,1,0,0,1,0,0]]))
+# # get the feature importance
+# print(dtc.feature_importances_)
+# # 5. visualize the classifier
+# tree.plot_tree(dtc)
+# # 6. save the tree
+# tree.export_graphviz(dtc, out_file='tree.dot', feature_names=['Alt','Bar','Fri','Hun','Pat','Price','Rain','Res','Type','Est'], class_names=['WillWait'], filled=True, rounded=True, special_characters=True)
+# # 5. visualize the tree
+# tree.plot_tree(dtc)
+# # 6. save the tree
+# tree.export_graphviz(dtc, out_file='tree.dot', feature_names=['Alt','Bar','Fri','Hun','Pat','Price','Rain','Res','Type','Est'], class_names=['WillWait'], filled=True, rounded=True, special_characters=True)
+# # 7. convert the tree to png
+# from IPython.display import Image
+# dot_data = tree.export_graphviz(dtc, out_file=None, feature_names=['Alt','Bar','Fri','Hun','Pat','Price','Rain','Res','Type','Est'], class_names=['WillWait'], filled=True, rounded=True, special_characters=True)
+# graph = pydotplus.graph_from_dot_data(dot_data)
+# graph.write_png('tree.png')
+# Image(graph.create_png())
+# # 8. predict the target variable for the test data
+# print(dtc.predict([[0,0,0,0,1,0,0,1,0,0]]))
+# # 8. open the png file
+# # 9. convert the tree to pdf
+# graph.write_pdf('tree.pdf')
+# # 10. open the pdf file
+# # 11. convert the tree to svg
+
+
+# data = dataset[:, 0:10]
+# target = dataset[:, 10]
+
+# print(target)
+# print(data)
+
+# le = preprocessing.LabelEncoder()
+# data[:, 0] = le.fit_transform(data[:, 0])
+# data[:, 1] = le.fit_transform(data[:, 1])
+# data[2] = le.fit_transform(data[2])
+# data[3] = le.fit_transform(data[3])
+# data[4] = le.fit_transform(data[4])
+# data[5] = le.fit_transform(data[5])
+# data[6] = le.fit_transform(data[6])
+# data[7] = le.fit_transform(data[7])
+# data[8] = le.fit_transform(data[8])
+# data[9] = le.fit_transform(data[9])
+
+# target = le.fit_transform(target)
+
+# dtc = tree.DecisionTreeClassifier(criterion="entropy")
+# dtc = dtc.fit(data, target)
+
+# target_pred = dtc.predict([[1, 0, 0, 1, 1, 0, 0, 1, 0, 0]])
+# print("Predicted output: ", le.inverse_transform(target_pred))
+
+# dot_data = tree.export_graphviz(dtc, out_file=None, feature_names=[
+#                                 'Alt', 'Bar', 'Fri', 'Hun', 'Pat', 'Price', 'Rain', 'Res', 'Type', 'Est'], class_names=le.classes_, filled=True, rounded=True, special_characters=True)
+# graph = graphviz.Source(dot_data)
+# graph.render("data")
