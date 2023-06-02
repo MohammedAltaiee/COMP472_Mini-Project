@@ -1,11 +1,18 @@
 {
   "cSpell.words": [
     "graphviz",
+    "numericalperd",
     "pydotplus",
     "sklearn"
   ],
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    // "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "python.formatting.provider": "none"
+  "python.formatting.provider": "none",
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "html.completion.attributeDefaultValue": "singlequotes",
+  "python.sttings.convertQuotes": false
 }
