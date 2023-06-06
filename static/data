@@ -8,7 +8,7 @@ edge [fontname="helvetica"] ;
 0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
 3 [label=<entropy = 0.0<br/>samples = 3<br/>value = [0, 3]<br/>class = Yes>, fillcolor="#399de5"] ;
 2 -> 3 ;
-4 [label=<Fri &le; 0.5<br/>entropy = 1.0<br/>samples = 2<br/>value = [1, 1]<br/>class = No>, fillcolor="#ffffff"] ;
+4 [label=<Bar &le; 0.5<br/>entropy = 1.0<br/>samples = 2<br/>value = [1, 1]<br/>class = No>, fillcolor="#ffffff"] ;
 2 -> 4 ;
 5 [label=<entropy = 0.0<br/>samples = 1<br/>value = [1, 0]<br/>class = No>, fillcolor="#e58139"] ;
 4 -> 5 ;
