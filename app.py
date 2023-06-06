@@ -5,14 +5,16 @@ from graphviz import render
 from sklearn.model_selection import train_test_split
 from sklearn import tree
 from sklearn.preprocessing import LabelEncoder
+import math
 
-# from numpy import np
 
 app = Flask(__name__)
 app.secret_key= "thekeyisthekey"
 
 @app.route("/", methods=["POST", "GET"])
 def user_input():
+
+    # Getting user input from form (UI)
     if request.method == "POST":
         alt = int(request.form.get("alt"))
         bar = int(request.form.get("bar"))
@@ -25,6 +27,7 @@ def user_input():
         type = int(request.form.get("type"))
         est = int(request.form.get("est"))
 
+    # Saving dataset
         dataset = pd.DataFrame(
             {
                 "Alt": [
@@ -184,7 +187,7 @@ def user_input():
             }
         )
 
-        # print(dataset)
+        # Saving column names from data set 
         col_names = [
             "Alt",
             "Bar",
@@ -198,28 +201,29 @@ def user_input():
             "Est",
         ]
         
-        #  converting our table to a numerical data
-        # numericalperdDataset = predDataset.apply(LabelEncoder().fit_transform)
+        # Converting dataset table to a numerical data
         numericalDataset = dataset.apply(LabelEncoder().fit_transform)
         print(numericalDataset)
-        # make the data and the target
+
+        # Assigning columns names to data and target to last column of the dataset 
         data = numericalDataset[col_names]
         target = numericalDataset.WillWait
-        # what is the test_size to include all the col_names in the results and what is the train_test_split values
-        # X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=1, random_state=42)
-        # why the test_size is equal to 0.3?
+        
+        # Split arrays or matrices into random train and test subsets
         data_train, data_test, target_train, target_test = train_test_split(
-            data, target, test_size=0.2, random_state=32
-        )  # 80 % for training
-        # creating the decision  classifier objects
+            data, target, test_size=0.2, random_state=32)  # 80 % for training, 20 % for testing
+        
+        # Creating the decision tree classifier
         dtc = tree.DecisionTreeClassifier(
-            criterion="entropy", splitter="best"
-        )  # random_state=None???
+            criterion="entropy", splitter="best")
+         
         predDataset = [alt, bar, fri, hun, price, pat, rain, res, type, est]
         print(predDataset)
-        # 3. train the classifier
+
+        # Training the decision tree classifier. Training using fit() method by passing input data (data_train) as a X and output (data target_train) as Y
         dtc = dtc.fit(data_train, target_train)
         tree.plot_tree(dtc)
+    
         dot_data = tree.export_graphviz(
             dtc,
             out_file=None,
@@ -240,32 +244,52 @@ def user_input():
             rounded=True,
             special_characters=True,
         )
+
+        # Printing the tree
         graph = graphviz.Source(dot_data, format="png")
+        
+        # Saving the png in static/data directory
         graph.render("static/data")
 
-        # # predict from user input
+        # Predicting from user input
         if dtc.predict([predDataset]):
             # className="yes"
-            session['classN']= 'yes'
+            session['classN']= 'Yes'
             # return 'classN'
         else:
             # className="no"
             session['classN']= 'No'
             # return 'classN'
+
+
+
+        # Calculating the entropy of the last column "Will wait"
+        print(dataset["WillWait"])
+        counterYes=0
+        counterNo=0
         
-        # return className
-        # print(session["classN"])
-        #session['className'] = className
+        for item in dataset["WillWait"]:
+            if item == "yes":
+                counterYes+=1
+            else:
+                counterNo+=1
+
+        print("counterYes: "+str(counterYes))
+        print("counterNo: "+str(counterNo))
+        # Calculating the entropy using the formula given in class
+        entropy=-(counterNo/(counterNo+counterYes))*math.log2(counterNo/(counterNo+counterYes))-(counterYes/(counterNo+counterYes))*math.log2(counterYes/(counterNo+counterYes))
+
+        print(f"The entropy of the last column is equal to {entropy}")
+         
         return redirect(url_for("output"))
 
     return render_template("user_input.html")
 
 @app.route("/output")
 def output():
+    # Passing the value of the class name from the user page 
     cn=session.get('classN',None)
-    print(cn)
-    # className = session.get('className')
-    print("output def :"+cn)
+    print("Output decision :"+cn)
     return render_template("output.html", cn=cn)
 
 
